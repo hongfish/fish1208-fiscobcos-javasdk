@@ -11,7 +11,7 @@
     <groupId>com.fish1208</groupId>
     <artifactId>fish1208-fiscobcos-javasdk</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>fish1208-fiscobcos-javasdk</name>
     <description>基于FiscoBcos的java-sdk实现区块链服务</description>
 
@@ -78,21 +78,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
-        </dependency>
-
-        <!-- 打war包时加入此项， 告诉spring-boot tomcat相关jar包用外部的，不要打进去 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--打war包，添加servlet api-->
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-servlet-api</artifactId>
-            <version>7.0.42</version>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
