@@ -1,0 +1,6 @@
+server:
+  port: 7022
+
+spring:
+  profiles:
+    active: dev

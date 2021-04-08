@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- 设置日志保存路径 -->
+	<property name="LOG_HOME" value="./logs/"/>
+
+	<!-- 彩色日志 -->
+	<!-- 彩色日志依赖的渲染类 
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+	<conversionRule conversionWord="wEx"
+					converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />-->
+	<!-- 彩色日志格式 -->
+	<property name="CONSOLE_LOG_PATTERN"
+			  value="${CONSOLE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n}" />
+
+
+	<!-- Console 输出设置 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	<!-- File Appender -->
+	<appender name="WEB_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<file>${LOG_HOME}/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--定义了日志的切分方式——把每一天的日志归档到一个文件中-->
+			<fileNamePattern>${LOG_HOME}/debug.%d{yyyyMMdd}.log</fileNamePattern>
+			<!--表示只保留最近15天的日志-->
+			<maxHistory>15</maxHistory>
+			<!--指定日志文件的上限大小，例如设置为1GB的话，那么到了这个值，就会删除旧的日志-->
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<!--日志输出格式-->
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<appender name="WEB_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+		</filter>
+		<file>${LOG_HOME}/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--定义了日志的切分方式——把每一天的日志归档到一个文件中-->
+			<fileNamePattern>${LOG_HOME}/info.%d{yyyyMMdd}.log</fileNamePattern>
+			<!--表示只保留最近15天的日志-->
+			<maxHistory>15</maxHistory>
+			<!--指定日志文件的上限大小，例如设置为1GB的话，那么到了这个值，就会删除旧的日志-->
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<!--日志输出格式-->
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<appender name="WEB_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+		</filter>
+		<file>${LOG_HOME}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--定义了日志的切分方式——把每一天的日志归档到一个文件中-->
+			<fileNamePattern>${LOG_HOME}/error.%d{yyyyMMdd}.log</fileNamePattern>
+			<!--表示只保留最近15天的日志-->
+			<maxHistory>15</maxHistory>
+			<!--指定日志文件的上限大小，例如设置为1GB的话，那么到了这个值，就会删除旧的日志-->
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<!--日志输出格式-->
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
+    <!-- com.fish1208为根包，也就是只要是发生在这个根包下面的所有日志操作行为的权限都是DEBUG -->
+    <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+	<!--additivity属性为false，表示此loger的打印信息不再向上级传递，改成additivity="true"的话，就会打印两次，因为打印信息向上级传递，logger本身打印一次，root接到后又打印一次-->
+	<logger name="com.fish1208" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" /><!---->
+		<appender-ref ref="WEB_INFO" />
+		<appender-ref ref="WEB_ERROR" />
+	</logger>
+
+	<!-- 异步输出 -->
+	<appender name ="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>512</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref ="WEB_INFO"/>
+	</appender>
+
+	<!--用来指定最基础的日志输出级别，只有一个level属性-->
+	<root level="INFO">
+		<!--标识这个appender将会添加到这个loger-->
+		<appender-ref ref="STDOUT" /><!---->
+		<appender-ref ref="WEB_INFO" />
+		<appender-ref ref="WEB_ERROR" />
+	</root>
+</configuration>

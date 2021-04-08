@@ -1,0 +1,8 @@
+channel-service:
+  group-id: 1 # sdk实际连接的群组
+
+config-toml:
+  config-path: classpath:config.toml
+
+contract-address:
+  kVPerson: "0x3cc40ecd5000f58c3458fef29b91114bd5e18da3"
