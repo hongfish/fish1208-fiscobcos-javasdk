@@ -9,5 +9,8 @@ import lombok.Data;
 public class ContractAddress {
 
     private String kVPerson;
+    private String questionAnswer;
+    private String worldCup;
+    private String erc1155Tradable;
 
 }

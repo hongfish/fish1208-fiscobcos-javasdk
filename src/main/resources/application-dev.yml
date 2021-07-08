@@ -5,4 +5,9 @@ config-toml:
   config-path: classpath:config.toml
 
 contract-address:
-  kVPerson: "0x3cc40ecd5000f58c3458fef29b91114bd5e18da3"
+  kVPerson: "0x421cc8a72e22fda941f8713ef16043141c84e95d"
+  questionAnswer: "0x0a6aaf8449bb6e81e4c74a5f7cf962feea712cc7"
+  worldCup: "0xa9d609846c3d73d006f0b42818d340f38d5742ea"
+  billController: "0x873726b4ca1451a598643430f83d3e63819dd782"
+  erc1155: "0x64a3a05cad74b4b9099a5036b994552c6e2c8c96"
+  erc1155Tradable: "0xb6f5ee197d6ae7eddbd6cf003e564b044d82b9a7"

@@ -19,7 +19,7 @@ sslKey = "conf/sdk.key"                   # SSL key file path
                                             # default load the GM SSL encryption privateKey from ${certPath}/gm/gmensdk.key
 
 [network]
-peers=["192.168.160.135:20200", "192.168.160.135:20201"]    # The peer list to connect
+peers=["192.168.160.136:20200"]    # The peer list to connect
 
 # Configure a private topic as a topic message sender.
 # [[amop]]
@@ -34,10 +34,10 @@ peers=["192.168.160.135:20200", "192.168.160.135:20201"]    # The peer list to c
 
 [account]
 keyStoreDir = "account"         # The directory to load/store the account file, default is "account"
-accountFilePath = "conf/0x9ff96dcf17f27ddd643c23bc1236733aa92a1f20.pem"          # The account file path (default load from the path specified by the keyStoreDir)
+accountFilePath = "conf/0xa8649e8dabd359f9344c9892928f02bb2cab2bb5.pem"          # The account file path (default load from the path specified by the keyStoreDir)
 accountFileFormat = "pem"       # The storage format of account file (Default is "pem", "p12" as an option)
 
-accountAddress = "0x9ff96dcf17f27ddd643c23bc1236733aa92a1f20"           # The transactions sending account address
+accountAddress = "0xa8649e8dabd359f9344c9892928f02bb2cab2bb5"           # The transactions sending account address
                                 # Default is a randomly generated account
                                 # The randomly generated account is stored in the path specified by the keyStoreDir
 
