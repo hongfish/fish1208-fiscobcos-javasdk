@@ -38,11 +38,13 @@ public class ERC1155TradableController {
     public Result<?> create(@RequestBody Map<String, Object> param) throws Exception {
         String initialOwner = (String)param.get("initialOwner");
         BigInteger initialSupply = Convert.toWei((String)param.get("initialSupply"), Convert.Unit.ETHER).toBigInteger();
+        BigInteger id = BigInteger.valueOf((Integer)param.get("id"));
         String uri = (String)param.get("uri");
         String data = (String)param.get("data");
-        TransactionReceipt receipt = erc1155Tradable.create(initialOwner, initialSupply, uri, data.getBytes());
+        TransactionReceipt receipt = erc1155Tradable.create(initialOwner, initialSupply, id, uri, data.getBytes());
+        log.info("create={}", JSON.toJSONString(receipt));
         if(receipt.isStatusOK()){
-            Tuple1<BigInteger> tuple1 = erc1155Tradable.getCreateOutput(receipt);
+            Tuple1<BigInteger> tuple1 = erc1155Tradable.getCreateAddressUint256Uint256StringBytesOutput(receipt);
             return Result.data(tuple1.getValue1());
         }
         return Result.fail("create is fail");
